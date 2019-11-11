@@ -1,4 +1,4 @@
-import { Platform } from 'react-native';
+import {Platform} from 'react-native';
 
 export const foregroundColor = '#ffffff';
 export const backgroundColor = '#f4f4f4'; // Agenda's reservations bg color
@@ -18,8 +18,8 @@ export const textMonthFontFamily = 'System';
 export const textDayHeaderFontFamily = 'System';
 export const todayButtonFontFamily = 'System';
 
-export const textDayFontWeight = '300';
-export const textMonthFontWeight = '300';
+export const textDayFontWeight = '400';
+export const textMonthFontWeight = '400';
 export const textDayHeaderFontWeight = undefined;
 export const todayButtonFontWeight = '600';
 
@@ -34,10 +34,10 @@ export const arrowStyle = undefined;
 
 export const calendarBackground = foregroundColor;
 export const textSectionTitleColor = '#b6c1cd';
-export const selectedDayBackgroundColor = textLinkColor;
+export const selectedDayBackgroundColor = '#29A8C8';
 export const selectedDayTextColor = foregroundColor;
 export const todayBackgroundColor = undefined;
-export const todayTextColor = textLinkColor;
+export const todayTextColor = '#29A8C8';
 export const dayTextColor = textDefaultColor;
 export const textDisabledColor = '#d9e1e8';
 export const dotColor = textLinkColor;

@@ -29,8 +29,6 @@ class Calendar extends Component {
     static displayName = 'Calendar';
 
     static propTypes = {
-        /** Show / hide calendar header (eg. January 2016 - week days) */
-        showHeader: PropTypes.bool,
         /** Specify theme properties to override specific styles for calendar parts. Default = {} */
         theme: PropTypes.object,
         /** Collection of dates that have to be marked. Default = {} */
@@ -98,9 +96,9 @@ class Calendar extends Component {
         this.shouldComponentUpdate = shouldComponentUpdate;
     }
 
-    componentWillReceiveProps(nextProps) {
-        const current = parseDate(nextProps.current);
-        if (current && current.toString('yyyy MM') !== this.state.currentMonth.toString('yyyy MM')) {
+    componentDidUpdate(prevProps, prevState) {
+        const current = parseDate(this.props.current);
+        if (current && current.toString('yyyy MM') !== prevState.currentMonth.toString('yyyy MM')) {
             this.setState({
                 currentMonth: current.clone(),
             });
@@ -225,8 +223,16 @@ class Calendar extends Component {
     }
 
     renderWeekNumber(weekNumber) {
-        return <Day key={`week-${weekNumber}`} theme={this.props.theme} marking={{disableTouchEvent: true}}
-                    state="disabled">{weekNumber}</Day>;
+        return (
+            <Day
+                key={`week-${weekNumber}`}
+                theme={this.props.theme}
+                marking={{disableTouchEvent: true}}
+                state="disabled"
+            >
+                {weekNumber}
+            </Day>
+        );
     }
 
     renderWeek(days, id) {
@@ -261,23 +267,21 @@ class Calendar extends Component {
 
         return (
             <View style={[this.style.container, this.props.style]}>
-                {this.props.showHeader && (
-                    <CalendarHeader
-                        style={this.props.headerStyle}
-                        theme={this.props.theme}
-                        hideArrows={this.props.hideArrows}
-                        month={this.state.currentMonth}
-                        addMonth={this.addMonth}
-                        showIndicator={indicator}
-                        firstDay={this.props.firstDay}
-                        renderArrow={this.props.renderArrow}
-                        monthFormat={this.props.monthFormat}
-                        hideDayNames={this.props.hideDayNames}
-                        weekNumbers={this.props.showWeekNumbers}
-                        onPressArrowLeft={this.props.onPressArrowLeft}
-                        onPressArrowRight={this.props.onPressArrowRight}
-                    />
-                )}
+                <CalendarHeader
+                    style={this.props.headerStyle}
+                    theme={this.props.theme}
+                    hideArrows={this.props.hideArrows}
+                    month={this.state.currentMonth}
+                    addMonth={this.addMonth}
+                    showIndicator={indicator}
+                    firstDay={this.props.firstDay}
+                    renderArrow={this.props.renderArrow}
+                    monthFormat={this.props.monthFormat}
+                    hideDayNames={this.props.hideDayNames}
+                    weekNumbers={this.props.showWeekNumbers}
+                    onPressArrowLeft={this.props.onPressArrowLeft}
+                    onPressArrowRight={this.props.onPressArrowRight}
+                />
                 <View style={this.style.monthView}>{weeks}</View>
             </View>);
     }

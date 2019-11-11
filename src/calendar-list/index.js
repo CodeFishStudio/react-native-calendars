@@ -139,12 +139,12 @@ class CalendarList extends Component {
         this.listView.scrollToOffset({offset: scrollAmount, animated: false});
     }
 
-    componentWillReceiveProps(props) {
-        const current = parseDate(this.props.current);
-        const nextCurrent = parseDate(props.current);
+    componentDidUpdate(prevProps, prevState) {
+        const current = parseDate(prevProps.current);
+        const nextCurrent = parseDate(this.props.current);
 
-        if (nextCurrent && current && nextCurrent.getTime() !== current.getTime()) {
-            this.scrollToMonth(nextCurrent);
+        if (nextCurrent && current && nextCurrent.getTime() === current.getTime()) {
+            return;
         }
 
         const rowclone = this.state.rows;
@@ -158,6 +158,7 @@ class CalendarList extends Component {
             }
             newrows.push(val);
         }
+
         this.setState({
             rows: newrows,
         });
