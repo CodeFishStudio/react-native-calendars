@@ -200,7 +200,7 @@ class ReactComp extends Component {
                 contentContainerStyle={this.styles.content}
                 renderItem={this.renderRow.bind(this)}
                 data={this.state.reservations}
-                onScroll={this.onScroll.bind(this)}
+                //onScroll={this.onScroll.bind(this)}
                 showsVerticalScrollIndicator={false}
                 scrollEventThrottle={200}
                 onMoveShouldSetResponderCapture={() => {
